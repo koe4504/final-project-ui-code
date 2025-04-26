@@ -13,7 +13,7 @@ BEGIN
         description
     ) VALUES (
         NEW.child_id,
-        50.00,
+        100.00,
         NEW.date,
         'unpaid',
         CONCAT('Billing for attendance on ', DATE_FORMAT(NEW.date, '%Y-%m-%d'))
