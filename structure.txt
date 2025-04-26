@@ -1,0 +1,74 @@
+daycare.icom.pri/
+├── assets
+│   ├── css
+│   │   └── styles.css
+│   ├── images
+│   └── js
+├── auth
+│   ├── authenticate.php
+│   ├── login.php
+│   └── logout.php
+├── config
+│   ├── config.php
+│   └── db_connect.php
+├── dashboard.php
+├── includes
+│   ├── footer.php
+│   ├── header.php
+│   ├── navbar.php
+│   ├── role_check.php
+│   └── session.php
+├── index.php
+├── pages
+│   ├── activities.php
+│   ├── activity_resources.php
+│   ├── assessments.php
+│   ├── attendance.php
+│   ├── billing.php
+│   ├── children.php
+│   ├── create_activities.php
+│   ├── create_activity_resource.php
+│   ├── create_assessment.php
+│   ├── create_attendance.php
+│   ├── create_billing.php
+│   ├── create_child.php
+│   ├── create_notification.php
+│   ├── create_parent.php
+│   ├── create_progress.php
+│   ├── create_staff.php
+│   ├── create_teacher_assignment.php
+│   ├── create_user.php
+│   ├── delete_activities.php
+│   ├── delete_activity_resource.php
+│   ├── delete_assessment.php
+│   ├── delete_attendance.php
+│   ├── delete_billing.php
+│   ├── delete_child.php
+│   ├── delete_notification.php
+│   ├── delete_parent.php
+│   ├── delete_progress.php
+│   ├── delete_staff.php
+│   ├── delete_teacher_assignment.php
+│   ├── delete_user.php
+│   ├── edit_activities.php
+│   ├── edit_activity_resource.php
+│   ├── edit_assessment.php
+│   ├── edit_attendance.php
+│   ├── edit_billing.php
+│   ├── edit_child.php
+│   ├── edit_notification.php
+│   ├── edit_parent.php
+│   ├── edit_progress.php
+│   ├── edit_staff.php
+│   ├── edit_teacher_assignment.php
+│   ├── edit_user.php
+│   ├── fetch_recipients.php
+│   ├── notifications.php
+│   ├── parents.php
+│   ├── progress.php
+│   ├── staff_dashboard.php
+│   ├── staff.php
+│   ├── teacher_assignments.php
+│   └── users.php
+└── uploads
+

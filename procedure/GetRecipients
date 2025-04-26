@@ -1,0 +1,15 @@
+
+DELIMITER $$
+USE `daycare_management`$$
+CREATE DEFINER=`dbadmin`@`localhost` PROCEDURE `GetRecipients`(IN type VARCHAR(50))
+BEGIN
+    IF type = 'Parent' THEN
+        SELECT id, name FROM parents;
+    ELSEIF type = 'Staff' THEN
+        SELECT id, name FROM staff;
+    ELSEIF type = 'Child' THEN
+        SELECT id, name FROM children;
+    END IF;
+END$$
+
+DELIMITER ;

@@ -1,0 +1,12 @@
+DELIMITER //
+
+CREATE TRIGGER trg_after_attendance_insert
+AFTER INSERT ON attendance
+FOR EACH ROW
+BEGIN
+    IF NEW.status = 'present' THEN
+        CALL create_billing_for_attendance(NEW.child_id, NEW.date);
+    END IF;
+END //
+
+DELIMITER ;

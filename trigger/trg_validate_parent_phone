@@ -1,0 +1,20 @@
+USE `daycare_management`$$
+CREATE
+DEFINER=`dbadmin`@`localhost`
+TRIGGER `daycare_management`.`validate_parent_phone`
+BEFORE INSERT ON `daycare_management`.`parents`
+FOR EACH ROW
+BEGIN
+    -- Ensure phone number contains only digits and optional '+'
+    IF NEW.phone NOT REGEXP '^[+]?[0-9]{10,15}$' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Invalid phone number format!';
+    END IF;
+    
+    -- Prevent duplicate phone numbers across staff and parents tables
+    IF (SELECT COUNT(*) FROM parents WHERE phone = NEW.phone) > 0
+        OR (SELECT COUNT(*) FROM staff WHERE phone = NEW.phone) > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Duplicate phone number found!';
+    END IF;
+END$$

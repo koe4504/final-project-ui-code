@@ -1,0 +1,14 @@
+
+DELIMITER $$
+USE `daycare_management`$$
+CREATE DEFINER=`dbadmin`@`localhost` FUNCTION `get_attendance_count`(date_Input DATE, status_Type ENUM('present', 'absent')) RETURNS int
+    DETERMINISTIC
+BEGIN
+    DECLARE attendance_count INT;
+    SELECT COUNT(*) INTO attendance_count 
+    FROM attendance 
+    WHERE date = date_Input AND status = status_Type;
+    RETURN attendance_count;
+END$$
+
+DELIMITER ;

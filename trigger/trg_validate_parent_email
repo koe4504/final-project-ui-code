@@ -1,0 +1,21 @@
+DELIMITER $$
+USE `daycare_management`$$
+CREATE
+DEFINER=`dbadmin`@`localhost`
+TRIGGER `daycare_management`.`validate_parent_email`
+BEFORE INSERT ON `daycare_management`.`parents`
+FOR EACH ROW
+BEGIN
+    -- Ensure email format is valid
+    IF NEW.email NOT REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Invalid email format!';
+    END IF;
+    
+    -- Prevent duplicate emails in both tables
+    IF (SELECT COUNT(*) FROM parents WHERE email = NEW.email) > 0
+        OR (SELECT COUNT(*) FROM staff WHERE email = NEW.email) > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Duplicate email found!';
+    END IF;
+END$$

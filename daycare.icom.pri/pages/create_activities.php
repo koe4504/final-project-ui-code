@@ -1,0 +1,53 @@
+<?php
+#include '../includes/session.php';
+include '../config/db_connect.php';
+include '../includes/header.php';
+
+#checkRole('admin');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $activity_date = $_POST['activity_date'];
+    
+    $stmt = $conn->prepare("INSERT INTO learning_activities (name, description, activity_date) VALUES (?, ?, ?)");
+    if ($stmt->execute([$name, $description, $activity_date])) {
+        header("Location: activities.php");
+        exit();
+    } else {
+        $error = "Failed to add activity.";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Learning Activity</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Create Learning Activity</h2>
+        <?php if (isset($error)) echo "<div class='alert alert-danger'>$error</div>"; ?>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Activity Name</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Activity Date</label>
+                <input type="date" name="activity_date" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Activity</button>
+            <a href="activities.php" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+    <?php include '../includes/footer.php'; ?>
+</body>
+</html>

@@ -1,0 +1,18 @@
+DELIMITER $$
+
+CREATE TRIGGER after_user_update_update_staff
+AFTER UPDATE ON users
+FOR EACH ROW
+BEGIN
+    IF OLD.role = 'staff' THEN
+        UPDATE staff
+        SET
+            name = NEW.username,
+            email = NEW.email,
+            phone = NEW.phone,
+            role = NEW.role
+        WHERE user_id = NEW.id;
+    END IF;
+END$$
+
+DELIMITER ;
